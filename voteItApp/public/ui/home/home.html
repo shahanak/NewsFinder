@@ -1,0 +1,42 @@
+<div class="col-md-12" ng-controller="HomeCtrl">
+	<div class="container">
+		<div class="jumbotron">
+			<h1>News Finder</h1>
+		</div>
+	</div>
+	<div ng-show="showDiv">
+		<label for="Title">Title</label>
+		<input type ="text" 
+			   placeholder = "Title"
+			   ng-model = "news.title"
+			   class="form-control"
+			   id="Title"
+			   required>
+	    <label for="Description">Description</label>
+	    <input type="text"
+	    		ng-model = "news.description"
+	    		placeholder = "Description"
+	    		class="form-control" 
+	    		id="Description"
+	    		required>
+		<input type="submit" class="btn btn-info btn-block" value="Save" ng-click="save(news)">
+		<input type="submit" class="btn btn-info btn-block" value="Cancel" ng-click="cancel()">
+	</div>
+	<div ng-hide="showDiv">
+	<input type="submit" class="btn btn-info btn-block" value="Add News" ng-click="show()">
+	</div>
+	<div class="container">
+		<div class = "jumbotron">
+		<table class="table table-striped">
+		<tr><th>Title</th><th>Description</th><th></th><th></th></tr>
+			<tr ng-repeat="details in newses | orderBy: 'title' ">
+				<td>{{details.title}}</td>
+				<td>{{details.description}}</td>
+				<td>{{details.voteCount}}</td>
+				<td><button type="submit" value="Up" class="btn btn-info btn-xs" ng-click="up(details)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+				<button type="submit" value="Down" ng-class="{'true':'btn btn-info btn-xs','false':'btn btn-danger btn-xs'}[details.voteCount > -1]" ng-click="down(details)"> <span class="glyphicon glyphicon-arrow-down"></span></button></td>
+			</tr>
+		</table>
+		</div>
+	</div>
+</div>
