@@ -4,7 +4,7 @@
 			<h1>News Finder</h1>
 		</div>
 	</div>
-	<div ng-show="showDiv">
+	<div class="container" ng-show="showDiv">
 		<label for="Title">Title</label>
 		<input type ="text" 
 			   placeholder = "Title"
@@ -19,23 +19,27 @@
 	    		class="form-control" 
 	    		id="Description"
 	    		required>
+	    		<br>
 		<input type="submit" class="btn btn-info btn-block" value="Save" ng-click="save(news)">
-		<input type="submit" class="btn btn-info btn-block" value="Cancel" ng-click="cancel()">
+		<input type="submit" class="btn btn-info btn-block" value="Cancel" ng-click="cancel()"><br><br>
+
 	</div>
-	<div ng-hide="showDiv">
+	<div class="container" ng-hide="showDiv">
 	<input type="submit" class="btn btn-info btn-block" value="Add News" ng-click="show()">
+	<br><br>
 	</div>
 	<div class="container">
 		<div class = "jumbotron">
 		<table class="table table-striped">
-		<tr><th>Title</th><th>Description</th><th></th><th></th></tr>
-			<tr ng-repeat="details in newses | orderBy: 'title' ">
+		
+			<tr ng-repeat="details in newses">
 				<td>{{details.title}}</td>
 				<td>{{details.description}}</td>
-				<td>{{details.voteCount}}</td>
-				<td><button type="submit" value="Up" class="btn btn-info btn-xs" ng-click="up(details)"><span class="glyphicon glyphicon-arrow-up"></span></button>
-				<button type="submit" value="Down" ng-class="{'true':'btn btn-info btn-xs','false':'btn btn-danger btn-xs'}[details.voteCount > -1]" ng-click="down(details)"> <span class="glyphicon glyphicon-arrow-down"></span></button></td>
-			</tr>
+				<td><span  ng-class="{'true':'btn btn-success btn-s','false':'btn btn-danger btn-s'}[details.voteCount > -1]"><span class="badge">{{details.voteCount}} </span></td>
+				<td>
+				<button type="submit" value="Up" class="btn btn-info btn-xs" ng-click="up(details,newses)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+				<button type="submit" value="Down" class="btn btn-info btn-xs" ng-click="down(details,newses)"> <span class="glyphicon glyphicon-arrow-down"></span></button></td>
+			</tr>			
 		</table>
 		</div>
 	</div>
